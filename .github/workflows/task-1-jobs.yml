@@ -1,0 +1,43 @@
+name: Lint, Test, Build Workflow
+on: push
+jobs:
+  lint:
+    runs-on: ubutu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint code
+        run: npm run lint
+  test:
+    runs-on: ubutu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
+  build:
+    runs-on: ubutu-latest
+    needs: [lint, test]
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build App
+        run: npm run build
