@@ -1,4 +1,4 @@
-name: Lint, Test, Build Workflow
+name: Lint, Test, Build Workflow (many jobs)
 on: push
 jobs:
   lint:
